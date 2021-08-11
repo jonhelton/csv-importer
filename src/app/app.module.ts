@@ -7,6 +7,7 @@ import { DataTableComponent } from './components/data-table/data-table.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTableModule,
-    NgbModule
+    NgbModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

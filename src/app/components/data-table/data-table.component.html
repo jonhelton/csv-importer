@@ -1,17 +1,31 @@
-<input type="file" (change)="changeListener($event)">
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-      <!-- <th *ngFor="let header of finalHeaders" scope="col">{{ header }}</th> -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let camper of campers$ | async" (click)="select(camper)">
-      <td>
-        {{ camper.brand }}
-      </td>
-      
-    </tr>
-    </tbody>
-  </table>
+
+
+  <input class="d-none" id="input-file-id" (change)="changeListener($event)" type="file" />
+  <label for="input-file-id" class="btn btn-primary">Choose Files</label>
+
+    <input matInput (keyup)="applyFilter($event.target)" placeholder="Filter By Name Only....">
+
+<table mat-table  [dataSource]="dataSource" matSort class="table mat-elevation-z8" >
+  <ng-container matColumnDef="make">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Camper Make</th>
+    <td mat-cell *matCellDef="let camper"> {{camper.make}} </td>
+  </ng-container>
+  <ng-container matColumnDef="brand">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Camper Brand</th>
+    <td mat-cell *matCellDef="let camper"> {{camper.brand}} </td>
+  </ng-container>
+  <ng-container matColumnDef="sleeps">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Sleeps</th>
+    <td mat-cell *matCellDef="let camper"> {{camper.capacity | number}} </td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+    <td mat-cell *matCellDef="let camper"> {{camper.price | currency}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
