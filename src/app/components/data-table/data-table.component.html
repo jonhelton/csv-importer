@@ -3,16 +3,15 @@
 <table class="table table-striped">
     <thead>
     <tr>
-      <th *ngFor="let header of finalHeaders" scope="col">{{ header }}</th>
+      <!-- <th *ngFor="let header of finalHeaders" scope="col">{{ header }}</th> -->
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let data of finalData; index as i">
+    <tr *ngFor="let camper of campers$ | async" (click)="select(camper)">
       <td>
-        {{ (data | json) }}
+        {{ camper.brand }}
       </td>
-      <!-- <td>{{ country.area | number }}</td>
-      <td>{{ country.population | number }}</td> -->
+      
     </tr>
     </tbody>
   </table>
