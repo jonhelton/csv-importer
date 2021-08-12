@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
 import { Camper } from "../models";
 
 @Injectable({ providedIn: 'root'})
@@ -16,14 +15,6 @@ export class CampersManager {
         this.campers = [];
     }
 
-
-    public removeCamper(camper: Camper) { 
-        // console.log(camper);
-        // console.log(this.campers);
-        // this.campers = this.campers.filter(c => !c.equals(camper));
-        // this.campers$.next(this.campers);
-    }
-
     public importCampers(file: File) { 
         const reader: FileReader = new FileReader();
 
@@ -36,19 +27,12 @@ export class CampersManager {
             this.rows = this.rawData.split(this.lineFeed);
             this.rows.pop();
 
+            //For each row ( sans the header ) found in the CSV, generate a new Camper object and push into campers array
             this.rows.forEach(r => { 
                 let cols = r.split(this.delimeter);
                 this.campers.push(new Camper(cols[0], cols[1], +cols[2], +cols[3]));
             });
 
-
-
-
-            //this.campers$.getValue().concat()
         }
-    }
-
-    export() { 
-
     }
 }
