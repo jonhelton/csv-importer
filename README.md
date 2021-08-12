@@ -2,7 +2,7 @@
 
 To get started clone the repo, navigate to the repo directory and run `npm install`
 
-Relevant code for review can be found under src/app/components and src/app/models and src/app/services
+Relevant code for review can be found under `src/app/components` and `src/app/models` and `src/app/services`
 
 ## Development server
 
