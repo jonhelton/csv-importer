@@ -1,6 +1,6 @@
 # CsvImporter
 
-To get started clone the repo, navigater to the repo directory and run `npm install`
+To get started clone the repo, navigate to the repo directory and run `npm install`
 
 ## Development server
 
