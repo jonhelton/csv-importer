@@ -1,10 +1,22 @@
+<div class="jumbotron">
+  <h1 class="display-4">Ryan's CSV Camper Importer</h1>
+  <p class="lead">This simple Angular based web application uses Angular, Typescript, Bootstrap, and Angular Material.  A user can import a camper CSV to load camper objects into the table below.</p>
+  <hr class="my-4">
+  <p>Get started using the application by importing campers now...</p>
+  <p class="lead">
+    <input class="d-none" id="input-file-id" (change)="changeListener($event)" type="file" />
+    <label for="input-file-id" class="btn btn-primary">Import Campers</label>
+  </p>
+</div>
 
 
 
-  <input class="d-none" id="input-file-id" (change)="changeListener($event)" type="file" />
-  <label for="input-file-id" class="btn btn-primary">Choose Files</label>
 
-    <input matInput (keyup)="applyFilter($event.target)" placeholder="Filter By Name Only....">
+  <div class="example-container mat-elevation-z8">
+    <div class="example-header">
+<input matInput (keyup)="applyFilter($event.target)" placeholder="Filter Campers...">
+</div>
+</div>
 
 <table mat-table  [dataSource]="dataSource" matSort class="table mat-elevation-z8" >
   <ng-container matColumnDef="make">
@@ -26,6 +38,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
 
 

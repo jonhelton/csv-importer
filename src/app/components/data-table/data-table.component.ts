@@ -1,17 +1,15 @@
 import { AfterContentChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject } from 'rxjs';
 import { Camper } from 'src/app/models/camper';
 import { CampersManager } from 'src/app/services/campers-manager.service';
-import { convertToObject } from 'typescript';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements AfterContentChecked  {
+export class DataTableComponent implements AfterContentChecked, OnInit  {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   dataSource: MatTableDataSource<Camper>;
 
@@ -19,15 +17,19 @@ export class DataTableComponent implements AfterContentChecked  {
   constructor(public csv: CampersManager) {
    }
 
+   ngOnInit() { 
+    this.dataSource = new MatTableDataSource(this.csv.campers);
+    this.dataSource.filterPredicate = 
+    (data: Camper, filter: string) => { 
+      return (data.make.toLowerCase().indexOf(filter) != -1 
+      || data.brand.toLowerCase().indexOf(filter) != -1 
+      || data.capacity.toString().toLowerCase().indexOf(filter) != -1
+      || data.price.toString().toLowerCase().indexOf(filter) != -1) 
+    } 
+   }
+
    ngAfterContentChecked () {
-      this.dataSource = new MatTableDataSource(this.csv.campers);
       this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = function(data, filter: string): boolean {
-        
-        let test =  data.make.toLowerCase().includes(filter);
-        console.log( test);
-        return test;
-      };
   }
 
   changeListener($event: any): void { 
@@ -45,10 +47,7 @@ export class DataTableComponent implements AfterContentChecked  {
 
 
   applyFilter(filterValue: any) {
-    filterValue.value = filterValue?.value?.trim(); // Remove whitespace
-    filterValue.value = filterValue?.value?.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    console.log(filterValue.value);
-    this.dataSource.filter = filterValue.value;
+    this.dataSource.filter = filterValue?.value?.trim().toLowerCase();
   }
 
 }
