@@ -31,21 +31,7 @@ export class DataTableComponent implements AfterContentChecked, OnInit  {
    ngAfterContentChecked () {
       this.dataSource.sort = this.sort;
   }
-
-  changeListener($event: any): void { 
-    const files: FileList = $event.target.files;
-
-    if (files && files.length > 0) {
-      const file: File =  files.item(0) as File;
-      this.csv.importCampers(file);
-    } 
-  }
-
-  select(camper: Camper){ 
-    this.csv.removeCamper(camper);
-  }
-
-
+  
   applyFilter(filterValue: any) {
     this.dataSource.filter = filterValue?.value?.trim().toLowerCase();
   }

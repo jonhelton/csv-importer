@@ -1,0 +1,4 @@
+.jumbotron { 
+    background-color: #BEE5BF !important;  /*Need to use !imporant here due to bootstrap and material*/
+    color: black !important;
+}
